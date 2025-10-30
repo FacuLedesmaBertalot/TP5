@@ -1,0 +1,18 @@
+{
+    "name": "facul/tp5",
+    "description": "Trabajo Práctico 5",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "FacuLedesmaBertalot",
+            "email": "faculedesmabertalot@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Model\\": "Models/",
+            "Controllers\\": "Controllers/"
+        }
+    },
+    "require": {}
+}

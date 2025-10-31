@@ -19,20 +19,37 @@ class Session {
 
     public function iniciar($nombreUsuario, $psw) {
 
-        $resultado = false;
+        $loginExitoso = false;
         $usuario = Usuario::where('usnombre', $nombreUsuario);
 
         if ($usuario) {
             if (password_verify($psw, $usuario->uspass)) {
                 $_SESSION['login'] = true;
                 $_SESSION['idUsuario'] = $usuario->idUsuario;
-                $resultado = true;
+                $loginExitoso = true;
             }
         }
 
-        return $resultado;
+        return $loginExitoso;
     }
 
 
-    
+    // Valida si la sesión actual tiene un usuario y es válida
+    public function validar() {
+        $esValida = false;
+
+        if (isset($_SESSION['login']) && $_SESSION['login'] === true && isset($_SESSION['idUsuario'])) {
+            $esValida = true;
+        }
+
+        return $esValida;
+    }
+
+    // Devuelve true o false si la sesión está activa o no
+    public function activa() {
+        return $this->validar();
+    }
+
+
+    // FALTA getUsuario(), getRol(), cerrar()
 }

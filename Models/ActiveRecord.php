@@ -127,9 +127,22 @@ class ActiveRecord {
 
     // Busca un registro por su id
     public static function where($columna, $valor) {
-        $query = "SELECT * FROM " . static::$tabla  ." WHERE {$columna} = '{$valor}'";
-        $resultado = self::consultarSQL($query);
-        return array_shift( $resultado ) ;
+        $query = "SELECT * FROM " . static::$tabla . " WHERE {$columna} = ? LIMIT 1";
+        $stmt = self::$db->prepare($query);
+        if (!$stmt) return null;
+
+            // Vinculamos el valor de forma segura.
+            $stmt->bind_param("s", $valor);
+            $stmt->execute();
+
+            $resultado = $stmt->get_result();
+            $registro = $resultado->fetch_assoc();
+
+        if (!$registro) {
+            return null;
+        }
+
+        return static::crearObjeto($registro);
     }
 
 

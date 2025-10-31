@@ -15,7 +15,6 @@ class UsuarioController {
 
 
     // Procesa el alta de un nuevo usuario
-
     public static function alta() {
 
         $usuario = new Usuario();
@@ -36,7 +35,6 @@ class UsuarioController {
             }
         }
         require '../Vistas/usuarios/alta.php';
-
     }
 
     

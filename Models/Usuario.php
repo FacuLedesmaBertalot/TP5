@@ -6,6 +6,7 @@ class Usuario extends ActiveRecord {
 
     protected static $tabla = 'usuario';
     protected static $columnasDB = ['idUsuario', 'usnombre', 'uspass', 'usmail', 'usdeshabilitado'];
+    protected static $primaryKey = 'idUsuario';
 
 
     public $idUsuario;
@@ -41,7 +42,7 @@ class Usuario extends ActiveRecord {
 
     // Hashear password
     public function hashPassword() {
-        $this->uspass = password_hash($this->uspass, PASSWORD_BCRYPT);
+        $this->uspass = password_hash($this->uspass, PASSWORD_DEFAULT);
     }
 
 

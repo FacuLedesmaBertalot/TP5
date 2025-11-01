@@ -62,6 +62,18 @@ class Session {
         return $usuarioLogueado;
     }
 
+
+    // Devuelve el rol del usuario logueado
+    public function getRol() {
+        $roles = [];
+
+        if ($this->activa()) {
+            $roles = UsuarioRol::findRolesPorUsuario($_SESSION['idUsuario']);
+        }
+        
+        return $roles;
+    }
+
     // Cerrar sesión
     public function cerrar() {
         $_SESSION = [];

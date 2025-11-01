@@ -51,5 +51,16 @@ class Session {
     }
 
 
-    // FALTA getUsuario(), getRol(), cerrar()
+    // Devuelve el Objeto del Usuario Logueado
+    public function getUsuario() {
+        $usuarioLogueado = null;
+
+        if ($this->activa()) {
+            $usuarioLogueado = Usuario::find($_SESSION['idUsuario']);
+        }
+
+        return $usuarioLogueado;
+    }
+
+
 }

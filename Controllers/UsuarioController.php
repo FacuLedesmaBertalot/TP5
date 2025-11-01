@@ -10,7 +10,7 @@ class UsuarioController {
     public static function index() {
         $usuarios = Usuario::all();
 
-        require '../View/usuarios/index.php';
+        require '../View/listarUsuario.php';
     }
 
 
@@ -29,7 +29,7 @@ class UsuarioController {
                 $resultado =$usuario->guardar();
 
                 if ($resultado) {
-                    header ('Location: /');
+                    header ('Location: /TP5/listar-usuario.php');
                     exit;
                 }
             }

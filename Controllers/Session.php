@@ -62,5 +62,11 @@ class Session {
         return $usuarioLogueado;
     }
 
+    // Cerrar sesión
+    public function cerrar() {
+        $_SESSION = [];
+        session_destroy();
+    }
+
 
 }

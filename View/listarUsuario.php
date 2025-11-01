@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listar Usuarios</title>
+    <title>Listado de Usuarios</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
@@ -11,7 +11,7 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="mb-0">Gestión de Usuarios</h1>
-        <a href="ruta/a/tu/alta-usuario.php" class="btn btn-primary">Crear Nuevo Usuario</a>
+        <a href="alta-usuario.php" class="btn btn-primary">Crear Nuevo Usuario</a>
     </div>
 
     <div class="table-responsive">
@@ -33,7 +33,6 @@
                         <td><?php echo htmlspecialchars($usuario->usmail); ?></td>
                         <td>
                             <?php 
-                            // Lógica para mostrar el estado con "Badges" de Bootstrap
                             if ($usuario->usdeshabilitado) {
                                 echo '<span class="badge bg-danger">Inactivo</span>';
                             } else {
@@ -42,24 +41,39 @@
                             ?>
                         </td>
                         <td class="text-end">
-                            <a href="accion/actualizarLogin.php?id=<?php echo $usuario->idUsuario; ?>" class="btn btn-warning btn-sm">
-                                Modificar
-                            </a>
-                            
-                            <form method="POST" action="accion/eliminarLogin.php" class="d-inline ms-1" onsubmit="return confirm('¿Estás seguro de que quieres dar de baja a este usuario?');">
+                            <form method="POST" action="Actions/actualizarLogin.php" class="d-inline" onsubmit="return handleFormSubmit(this);">
                                 <input type="hidden" name="idUsuario" value="<?php echo $usuario->idUsuario; ?>">
-                                <button type="submit" class="btn btn-danger btn-sm">Baja</button>
+                                
+                                <button type="submit" name="accion" value="modificar" class="btn btn-warning btn-sm">
+                                    Modificar
+                                </button>
+                                
+                                <button type="submit" name="accion" value="baja" class="btn btn-danger btn-sm">
+                                    Baja
+                                </button>
                             </form>
-                        </td>
+                            </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
 </div>
-   
-
-
+    
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script>
+// Pequeño script para manejar la confirmación solo para la acción de baja
+function handleFormSubmit(form) {
+    // Obtenemos el botón que fue presionado
+    const action = document.activeElement.value;
+    
+    if (action === 'baja') {
+        return confirm('¿Estás seguro de que quieres dar de baja a este usuario?');
+    }
+    
+    // Para cualquier otra acción, simplemente envía el formulario
+    return true;
+}
+</script>
 </body>
 </html>

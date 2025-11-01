@@ -86,7 +86,7 @@ class UsuarioController {
                     $usuario->eliminar();
                 }
             }
-            header ('Location : /');
+            header ('Location : /TP5/listar-usuarios.php');
             exit;
         }
     }

@@ -3,9 +3,9 @@
 $id = filter_var($_GET['id'] ?? null, FILTER_VALIDATE_INT);
 
 if ($id) {
-    header('Location: /');
+    header('Location: ../modificar-usuario.php?id=' . $id);
     exit;
 } else {
 
-    header('Location: /../View/listarUsuario.php');
+    header('Location: /listar-usuarios.php');
 }

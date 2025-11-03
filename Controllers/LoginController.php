@@ -1,11 +1,9 @@
 <?php
 
 namespace Controllers;
-
-
 use Model\Usuario;
 
-class UsuarioController {
+class LoginController {
     
     public static function index() {
         $usuarios = Usuario::all();

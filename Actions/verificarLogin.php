@@ -1,10 +1,11 @@
 <?php
 
-    use Model\ActiveRecord;
-    use Controllers\Session;
+use Model\ActiveRecord;
+use Controllers\Session;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once __DIR__ . '/../vendor/autoload.php';
-    require_once __DIR__ . '/../config/database.php';
+    require_once __DIR__ . '/../Config/DataBase.php';
 
     
     ActiveRecord::setDB(conectarDB());

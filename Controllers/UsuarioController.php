@@ -10,7 +10,7 @@ class UsuarioController {
     public static function index() {
         $usuarios = Usuario::all();
 
-        require '../View/listarUsuario.php';
+        require './View/listarUsuario.php';
     }
 
 

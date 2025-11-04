@@ -32,9 +32,9 @@
                         ?>
                     </td>
                     <td class="text-end">
-                        <a href="accion/actualizarLogin.php?id=<?php echo $usuario->idUsuario; ?>" class="btn btn-warning btn-sm">Modificar</a>
+                        <a href="Actions/actualizarLogin.php?id=<?php echo $usuario->idUsuario; ?>" class="btn btn-warning btn-sm">Modificar</a>
                         
-                        <form method="POST" action="accion/eliminarLogin.php" class="d-inline ms-1" onsubmit="return confirm('¿Estás seguro?');">
+                        <form method="POST" action="Actions/eliminarLogin.php" class="d-inline ms-1" onsubmit="return confirm('¿Estás seguro?');">
                             <input type="hidden" name="idUsuario" value="<?php echo $usuario->idUsuario; ?>">
                             <button type="submit" class="btn btn-danger btn-sm">Baja Lógica</button>
                         </form>

@@ -29,12 +29,12 @@ class UsuarioController {
                 $resultado =$usuario->guardar();
 
                 if ($resultado) {
-                    header ('Location: /TP5/listar-usuario.php');
+                    header ('Location: /TP5/listar-usuarios.php');
                     exit;
                 }
             }
         }
-        require '../Vistas/usuarios/alta.php';
+        require './View/usuarios/alta.php';
     }
 
     

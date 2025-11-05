@@ -24,10 +24,10 @@
                     <td><?php echo htmlspecialchars($usuario->usmail); ?></td>
                     <td>
                         <?php 
-                        if ($usuario->usdeshabilitado) {
-                            echo '<span class="badge bg-danger">Inactivo</span>';
-                        } else {
+                        if ($usuario->usdeshabilitado === null) {
                             echo '<span class="badge bg-success">Activo</span>';
+                        } else {
+                            echo '<span class="badge bg-danger">Inactivo</span>';
                         }
                         ?>
                     </td>

@@ -117,13 +117,34 @@ class UsuarioController {
 
                 if ($usuario) {
 
-                    $usuario->usdeshabilitado = 1;
+                    $usuario->usdeshabilitado = date('Y-m-d H:i:s');
                     $usuario->eliminar();
                 }
             }
             header ('Location: /TP5/listar-usuarios.php');
             exit;
         }
+    }
+
+
+    // Verificar si es admin
+    public static function esAdmin() : bool {
+        $session = new \Controllers\Session();
+        
+        if (!$session->activa()) {
+            return false;
+        }
+
+        $rolesDelUsuario = $session->getRol();
+
+        foreach ($rolesDelUsuario as $rol) {
+
+            if ($rol->idRol == 1) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

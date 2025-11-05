@@ -205,4 +205,33 @@ class ActiveRecord {
         $stmt->bind_param("i", $id); // 'i' para integer
         return $stmt->execute();
     }
+
+
+
+    // Busca todos los registros que coincidan con una columna y valor
+    // Similar al where, pero sin Limit 1 y devuelve array
+    public static function whereAll($columna, $valor) {
+        $query = "SELECT * FROM " . static::$tabla . " WHERE {$columna} = ?";
+        
+        $stmt = self::$db->prepare($query);
+        if (!$stmt) return []; 
+
+
+        $stmt->bind_param("s", $valor); 
+        $stmt->execute();
+
+        $resultado = $stmt->get_result();
+        
+        // Iterar los resultados y crear objetos
+        $array = [];
+        while ($registro = $resultado->fetch_assoc()) {
+            $array[] = static::crearObjeto($registro);
+        }
+
+        // liberar la memoria
+        $stmt->close();
+
+        // retornar los resultados
+        return $array;
+    }
 }

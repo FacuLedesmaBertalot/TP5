@@ -20,9 +20,6 @@
         <li class="nav-item">
           <a class="nav-link" href="/TP5/listar-usuarios.php">Usuarios</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/TP5/listar-roles.php">Roles</a>
-        </li>
       </ul>
       <ul class="navbar-nav">
          <li class="nav-item">

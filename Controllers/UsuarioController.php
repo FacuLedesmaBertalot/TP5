@@ -77,16 +77,18 @@ class UsuarioController {
     public static function baja() {
 
         if ($_SERVER['REQUEST_METHOD'] ==='POST') {
-            $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
+            $id = filter_var($_POST['idUsuario'], FILTER_VALIDATE_INT);
 
             if ($id) {
                 $usuario = Usuario::find($id);
 
                 if ($usuario) {
+
+                    $usuario->usdeshabilitado = 1;
                     $usuario->eliminar();
                 }
             }
-            header ('Location : /TP5/listar-usuarios.php');
+            header ('Location: /TP5/listar-usuarios.php');
             exit;
         }
     }

@@ -43,8 +43,12 @@ class UsuarioController {
     public static function modificar() {
         $id = filter_var($_GET['id'] ?? null, FILTER_VALIDATE_INT);
 
+        if (!$id && $_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = filter_var($_POST['idUsuario'] ?? null, FILTER_VALIDATE_INT);
+        }
+
         if (!$id) {
-            header ('Location: /');
+            header('Location: /TP5/listar-usuarios.php');
             exit;
         }
 
@@ -52,23 +56,52 @@ class UsuarioController {
         $alertas = [];
 
         if (!$usuario) {
-            header('Location: /');
+            header('Location: /TP5/listar-usuarios.php'); 
             exit;
         }
 
+        $passwordActual = $usuario->uspass;
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
             $usuario->sincronizar($_POST);
+            
             $alertas = $usuario->validar();
+
+            
+            if (empty($_POST['uspass'])) {
+                $usuario->uspass = $passwordActual; 
+                
+                $nuevasAlertas = [];
+                foreach($alertas['error'] ?? [] as $alerta) {
+                    if ($alerta !== 'La contraseña debe tener al menos 6 caracteres') {
+                        $nuevasAlertas[] = $alerta;
+                    }
+                }
+                
+                if (!empty($nuevasAlertas)) {
+                    $alertas['error'] = $nuevasAlertas;
+                } else {
+                    unset($alertas['error']); 
+                }
+
+            } else {
+                if (empty($alertas['error'])) { 
+                     $usuario->hashPassword(); 
+                }
+            }
 
 
             if(empty($alertas)) {
-                $usuario->guardar();
-                header('Location: /TP5/ruta/a/tu/listado.php');
+                $usuario->guardar(); 
+                header('Location: /TP5/listar-usuarios.php'); 
                 exit;
             }
         }
 
-        require '../Vistas/usuarios/modificar.php';
+        // Si es GET (primera carga) o si es POST y hubo errores,
+        // se muestra el formulario con los datos y las alertas.
+        require './View/usuarios/modificar.php';
     }
 
 

@@ -32,7 +32,7 @@
                         ?>
                     </td>
                     <td class="text-end">
-                        <a href="Actions/actualizarLogin.php?id=<?php echo $usuario->idUsuario; ?>" class="btn btn-warning btn-sm">Modificar</a>
+                        <a href="/TP5/modificar-usuario.php?id=<?php echo $usuario->idUsuario; ?>" class="btn btn-warning btn-sm">Modificar</a>
                         
                         <form method="POST" action="/TP5/eliminar-usuario.php" class="d-inline ms-1" onsubmit="return confirm('¿Estás seguro?');">
                             <input type="hidden" name="idUsuario" value="<?php echo $usuario->idUsuario; ?>">
